@@ -11,6 +11,7 @@
   vertical-align: top;
   width: 300px;
   button {
+    margin-right: 5px;
     padding: 5px 10px;
     font-size: 20px;
     background: transparent;
@@ -27,12 +28,13 @@
     }
   }
   p {
-    line-height: 30px;
+    line-height: 40px;
+    font-size: 23px;
   }
   p.state {
     text-align: center;
     span {
-      color: #f40;
+      font-weight: 600;
     }
   }
   .radio-flex {

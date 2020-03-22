@@ -7,11 +7,22 @@ interface IProps {
   onClick: (state: GameState) => void;
   onPriority: (pieceType: PieceType) => void;
   newPieceType: PieceType;
+  onUndo: () => void;
 }
 export default function OperatePanel(props: IProps) {
+  let btnUndoComp = <></>;
+  if (
+    props.gameState === GameState.playing_black ||
+    props.gameState === GameState.playing_white
+  ) {
+    btnUndoComp = <button onClick={props.onUndo}>悔棋</button>;
+  }
+
   return (
     <div className="operate-panel">
-      <p className="state">游戏状态: {props.gameState}</p>
+      <p className="state">
+        游戏状态: <span>{props.gameState}</span>
+      </p>
       <button
         onClick={() => {
           if (props.gameState === GameState.init) {
@@ -27,6 +38,7 @@ export default function OperatePanel(props: IProps) {
       >
         {props.gameState === GameState.init ? "开始" : "重玩"}
       </button>
+      {btnUndoComp}
       <p>优先出棋方:</p>
       <div className="radio-flex">
         {[

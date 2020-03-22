@@ -1,4 +1,4 @@
-import { IBack, Point, IPiece } from "./types";
+import { IBack, Point, IPiece, PieceType } from "./types";
 
 export class Tool {
   /**
@@ -46,20 +46,31 @@ export class Tool {
   }
 
   /**
-   * 获取 pieceData 中的 item
+   * 通过坐标获取 pieceData 中的 item
+   * @private
    * @static
    * @param {IPiece[]} pieceData
-   * @param {IPiece} piece
+   * @param {Point} point 坐标
+   * @param {PieceType} [pieceType] 更严格的筛选，
    * @returns {(IPiece | null)}
    * @memberof Tool
    */
-  private static getArrItem(pieceData: IPiece[], piece: IPiece): IPiece | null {
+  private static getArrItem(
+    pieceData: IPiece[],
+    point: Point,
+    pieceType?: PieceType
+  ): IPiece | null {
     const item = pieceData.filter(it => {
       const {
         point: { x, y },
         type
       } = it;
-      return piece.point.x === x && piece.point.y === y && piece.type === type;
+      let is = false;
+      if (point.x === x && point.y === y) {
+        is = true;
+        if (pieceType !== undefined && type !== pieceType) is = false;
+      }
+      return is;
     });
     return item[0] || null;
   }
@@ -72,7 +83,7 @@ export class Tool {
    * @returns 返回 piece | null
    * @memberof Tool
    */
-  static core(pieceData: IPiece[], piece: IPiece) {
+  static isVictory(pieceData: IPiece[], piece: IPiece) {
     const template: any[] = [[], [], [], []],
       { size, type, point } = piece;
     for (let i = -2; i < 3; i++) {
@@ -90,11 +101,17 @@ export class Tool {
       });
     }
     const is = template.some(rowArr => {
-      const is = rowArr.every((it: IPiece) => {
-        return this.getArrItem(pieceData, it) !== null;
+      return rowArr.every((it: IPiece) => {
+        return this.getArrItem(pieceData, it.point, it.type) !== null;
       });
-      return is;
     });
     return is ? piece : null;
+  }
+  static judgeTheWinningSide(pieceData: IPiece[]): null | PieceType {
+    const item =
+      pieceData.filter(it => {
+        return Tool.isVictory(pieceData, it);
+      })[0] || null;
+    return item && item.type;
   }
 }
