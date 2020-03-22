@@ -1,0 +1,13 @@
+.piece {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 80%;
+  z-index: 100;
+  &-black {
+    background-image: url("./assets/black.png");
+  }
+  &-white {
+    background-image: url("./assets/white.png");
+  }
+}

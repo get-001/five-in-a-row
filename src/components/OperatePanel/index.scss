@@ -1,0 +1,50 @@
+.operate-panel {
+  display: inline-block;
+  position: relative;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #555;
+  cursor: default;
+  user-select: none;
+  background: #fff;
+  margin-left: 20px;
+  vertical-align: top;
+  width: 300px;
+  button {
+    padding: 5px 10px;
+    font-size: 20px;
+    background: transparent;
+    border: none;
+    outline: none;
+    background-color: #7b72e9;
+    border-color: #7b72e9;
+    color: #fff;
+    border-radius: 10px;
+    transition: all 0.5s;
+    &:hover {
+      background-color: #a49ef0;
+      border-color: #a49ef0;
+    }
+  }
+  p {
+    line-height: 30px;
+  }
+  p.state {
+    text-align: center;
+    span {
+      color: #f40;
+    }
+  }
+  .radio-flex {
+    display: flex;
+    justify-content: space-around;
+    label {
+      cursor: pointer;
+    }
+    input[type="radio"] {
+      width: 15px;
+      height: 15px;
+      margin-left: 5px;
+    }
+  }
+}

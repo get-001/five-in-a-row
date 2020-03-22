@@ -1,0 +1,16 @@
+.game-panel {
+  position: relative;
+  padding: 5px;
+  display: inline-block;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #555;
+  cursor: default;
+  user-select: none;
+  background: #fff;
+  & > .panel-back {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    background: #fafafa;
+  }
+}
