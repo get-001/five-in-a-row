@@ -6,15 +6,13 @@ interface IProps {
   gameState: GameState;
   onClick: (state: GameState) => void;
   onPriority: (pieceType: PieceType) => void;
-  newPieceType: PieceType;
+  nextPieceType: PieceType;
   onUndo: () => void;
+  showBtnUndo: boolean;
 }
 export default function OperatePanel(props: IProps) {
   let btnUndoComp = <></>;
-  if (
-    props.gameState === GameState.playing_black ||
-    props.gameState === GameState.playing_white
-  ) {
+  if (props.showBtnUndo) {
     btnUndoComp = <button onClick={props.onUndo}>悔棋</button>;
   }
 
@@ -27,7 +25,7 @@ export default function OperatePanel(props: IProps) {
         onClick={() => {
           if (props.gameState === GameState.init) {
             const state =
-              props.newPieceType === PieceType.black
+              props.nextPieceType === PieceType.black
                 ? GameState.playing_black
                 : GameState.playing_white;
             props.onClick(state);
